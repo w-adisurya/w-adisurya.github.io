@@ -10,4 +10,4 @@ interested in anything interesting.
 
 touch me at :  
 [LinkedIn](https://www.linkedin.com/in/adisuryaw/){:target="_blank"} \
-[Gmail](https://w.adisurya@gmail.com){:target="_blank"}
+[Instagram](https://www.instagram.com/asuryaws/){:target="_blank"}
