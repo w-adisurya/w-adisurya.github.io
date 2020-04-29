@@ -44,8 +44,9 @@ OS, just stuck for hours at skulls BIOS. Since skulls using SeaBIOS for coreboot
 coreboot](https://www.coreboot.org/SeaBIOS#Windows){:target="_blank"}. I quote the article says *"SeaBIOS has been tested with Windows XP, Windows 2008, Windows Vista (64/32 bit), Windows 7 (32 bit and 64 bit). However, Windows has a very strict ACPI interpreter, and some coreboot boards do not have a complete ACPI definition. As a result, some coreboot boards may fail during Windows boot (eg, it may fail with a STOP 0xA5 code). Many boards do have working ACPI and are able to boot XP/Vista/Windows 7. Please check the board documentation or ask on the mailing list if unsure of the status."* So i think the problem is ACPI and damn, i've already flash my Win10 laptop when i read this and i've too lazy to turning back so i've take the red pill, i've copy all my data and re-install again Win10 (take me damn half day to do this).
 4. Re-install windows issue.\
 When you install Windows in skulls coreboot, just remember this : make sure that every setting in skulls coreboot is exactly the same when you install Windows and
-after install Windows. I face issue that after i install Windows and booting back Windows going BSOD immediately, even before i install Windows driver in Device
-Manager.
-5. Memory setting issue in (again) Windows.\
+after install Windows. I face issue that after i install Windows and booting back Windows going BSOD immediately, even before i install Windows driver in Device Manager. And somehow i've got this Memory setting issue in (again) Windows.
+
+Will do image update for this post, ASAP, *finger crossed* :)
+
 
  
