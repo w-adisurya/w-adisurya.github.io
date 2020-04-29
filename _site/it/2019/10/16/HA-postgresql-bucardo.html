@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>High Availability PostgreSQL 9.6 using Bucardo | məˈmenˌtō</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="High Availability PostgreSQL 9.6 using Bucardo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Requirement:" />
+<meta property="og:description" content="Requirement:" />
+<link rel="canonical" href="http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html" />
+<meta property="og:url" content="http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html" />
+<meta property="og:site_name" content="məˈmenˌtō" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-16T22:32:00+07:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"High Availability PostgreSQL 9.6 using Bucardo","dateModified":"2019-10-16T22:32:00+07:00","datePublished":"2019-10-16T22:32:00+07:00","url":"http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html"},"description":"Requirement:","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="məˈmenˌtō" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">məˈmenˌtō</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">High Availability PostgreSQL 9.6 using Bucardo</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-10-16T22:32:00+07:00" itemprop="datePublished">Oct 16, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>Requirement:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>User Requirement</th>
+      <th>Installed</th>
+      <th>How to check</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OS</td>
+      <td>centos6.x</td>
+      <td>CentOS release 6.9 (Final)</td>
+      <td>/etc/centos-release</td>
+    </tr>
+    <tr>
+      <td>Postgres</td>
+      <td>9.6</td>
+      <td>9.6.15</td>
+      <td>SELECT version ();</td>
+    </tr>
+  </tbody>
+</table>
+
+<head>						<!--- Memberikan border line pada table --->
+<style>
+table 
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<p><br />							<!--- Memberikan blank line --->
+Buat dua Virtual Machine dengan konfigurasi sbb:</p>
+
+<p><strong>Dummy Server:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IP</th>
+      <th>Hostname</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>192.168.10.6</td>
+      <td> </td>
+      <td>Floating IP</td>
+    </tr>
+    <tr>
+      <td>192.168.10.10</td>
+      <td>node5.test</td>
+      <td>Master Server</td>
+    </tr>
+    <tr>
+      <td>192.168.10.11</td>
+      <td>node6.test</td>
+      <td>Slave Server</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Note</strong>:</p>
+<ul>
+  <li><em>Pastikan server master dan slave sama2 mempunyai eth0</em></li>
+  <li><em>Backup configuration file dengan nama .backup</em></li>
+</ul>
+
+<h3 id="install-bucardo-in-master-and-slave">Install Bucardo in Master and Slave</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://bucardo.org/downloads/DBIx-Safe-1.2.5.tar.gz
+tar xvfz dbix_safe.tar.gz
+cd DBIx-Safe-1.2.5
+perl Makefile.PL
+make
+make test
+sudo make install
+wget https://bucardo.org/downloads/Bucardo-5.5.0.tar.gz
+tar xvfz Bucardo-5.5.0.tar.gz
+perl Makefile.PL
+make
+sudo make install
+sudo mkdir /var/run/bucardo
+sudo chmod 777 /var/run/bucardo
+su postgres
+psql
+create user bucardo superuser;
+create database bucardo;
+alter database bucardo owner to bucardo;
+\q
+exit
+sudo bucardo install
+bucardo show all
+</code></pre></div></div>
+
+<h3 id="create-database-and-tables-in-master-and-slave">Create Database and tables in Master and Slave</h3>
+<p>Bucardo mandatory that every table should have primary key for replication purpose</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su postgres
+psql
+create database mus;
+\c mus
+create table tab1( id integer primary key,num integer);
+create table tab2( id integer primary key,num integer);
+create table tab3( id integer primary key,num integer);
+\dt
+\q
+</code></pre></div></div>
+
+<h3 id="make-replication-with-bucardo-setting-only-in-master">Make Replication with Bucardo, setting only in Master</h3>
+<p>bucardo add database serv1 dbname=mus
+bucardo add database serv2 dbname=mus host=192.168.10.11 dbuser=postgres dbpass=postgres<br />
+nano /var/lib/pgsql/9.6/data/pg_hba.conf</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># "local" is for Unix domain socket connections only
+local   all             bucardo                                 trust
+local   all             postgres                                trust
+local   all             all                                     trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+host    all             all             127.0.0.1/32            md5
+host    all             all             192.168.10.4/24         md5
+host    all             all             192.168.10.11/24        trust
+</code></pre></div></div>
+
+<p>bucardo add table % db=serv1<br />
+bucardo add table % db=serv2<br />
+bucardo add all tables –herd=one_two db=serv1<br />
+bucardo add all tables –herd=two_one db=serv2<br />
+bucardo add sync sync_onetotwo relgroup=one_two db=serv1,serv2<br />
+bucardo add sync sync_twotoone relgroup=two_one db=serv2,serv1<br />
+bucardo list database<br />
+bucardo list sync<br />
+bucardo status<br />
+mkdir /var/log/log.bucardo<br />
+tail -f /var/log/bucardo/log.bucardo<br />
+bucardo start<br />
+bucardo show all</p>
+
+<h3 id="testing">Testing</h3>
+<p>Using DBeaver Enterprise to Generate Mock Data in tables, make 1500 row in DB Master<br />
+<img src="\images\dbeaver-mock.JPG" alt="dbeaver-mock" title="dbeaver-mock" />
+<img src="\images\dbeaver-mock2.JPG" alt="dbeaver-mock2" title="dbeaver-mock2" /><br />
+<br />
+Check DB in Slave should be sama with data in DB Master<br />
+<img src="\images\dbeaver-mock3.JPG" alt="dbeaver-mock3" title="dbeaver-mock3" /><br />
+<br />
+Check Bucardo status replication<br />
+<img src="\images\dbeaver-mock4.JPG" alt="dbeaver-mock4" title="dbeaver-mock4" /><br />
+<br />
+Remove data from DB Slave in tab1, replace with 200 row data<br />
+<img src="\images\dbeaver-mock5.JPG" alt="dbeaver-mock5" title="dbeaver-mock5" /><br />
+<img src="\images\dbeaver-mock6.JPG" alt="dbeaver-mock6" title="dbeaver-mock6" /> 
+<br /> 
+Check in DB Master, should be 200 row data, same with DB Slave<br />
+<img src="\images\dbeaver-mock7.JPG" alt="dbeaver-mock7" title="dbeaver-mock7" /> 
+<br /></p>
+
+<h3 id="syntax-for-backup-restore-db">Syntax for backup restore DB</h3>
+<p>su postgres
+psql
+pg_dump “db_name” &gt; “place to save backup sql”
+<img src="\images\backup-db1.JPG" alt="backup-db1" title="backup-db1" />
+<br />
+To restore, first create database to restore data
+<img src="\images\backup-db2.JPG" alt="backup-db2" title="backup-db2" /><br />
+psql “db_name” &lt; “backup sql”
+<br />
+<img src="\images\backup-db3.JPG" alt="backup-db3" title="backup-db3" /><br />
+Check database in pgAdmin
+<br />
+<img src="\images\backup-db4.JPG" alt="backup-db4" title="backup-db4" />
+<img src="\images\backup-db5.JPG" alt="backup-db5" title="backup-db5" /></p>
+
+  </div><a class="u-url" href="/it/2019/10/16/HA-postgresql-bucardo.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">məˈmenˌtō</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">məˈmenˌtō</li><li><a class="u-email" href="mailto:w.adisurya@gmail.com">w.adisurya@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/w-adisurya"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">w-adisurya</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>to share and give another legacy to this lonely world</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

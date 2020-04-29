@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Coreboot Story using Skulls | məˈmenˌtō</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Coreboot Story using Skulls" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="YES. This is a noob story, you’ve been warned. Preambule Skulls is pre-built coreboot images for Thinkpad X230. I have two X230 and one of them i’m using as workhorse for my daily driver. Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen. I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework. Always remember that you can brick your laptop when you do this wrong. Here’s the great link to consider before do flashing : skulls chucknemeth stefanolaguardia" />
+<meta property="og:description" content="YES. This is a noob story, you’ve been warned. Preambule Skulls is pre-built coreboot images for Thinkpad X230. I have two X230 and one of them i’m using as workhorse for my daily driver. Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen. I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework. Always remember that you can brick your laptop when you do this wrong. Here’s the great link to consider before do flashing : skulls chucknemeth stefanolaguardia" />
+<link rel="canonical" href="http://localhost:4000/2020/03/04/coreboot-story.html" />
+<meta property="og:url" content="http://localhost:4000/2020/03/04/coreboot-story.html" />
+<meta property="og:site_name" content="məˈmenˌtō" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-04T00:00:00+07:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Coreboot Story using Skulls","dateModified":"2020-03-04T00:00:00+07:00","datePublished":"2020-03-04T00:00:00+07:00","url":"http://localhost:4000/2020/03/04/coreboot-story.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/03/04/coreboot-story.html"},"description":"YES. This is a noob story, you’ve been warned. Preambule Skulls is pre-built coreboot images for Thinkpad X230. I have two X230 and one of them i’m using as workhorse for my daily driver. Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen. I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework. Always remember that you can brick your laptop when you do this wrong. Here’s the great link to consider before do flashing : skulls chucknemeth stefanolaguardia","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="məˈmenˌtō" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">məˈmenˌtō</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Coreboot Story using Skulls</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-03-04T00:00:00+07:00" itemprop="datePublished">Mar 4, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>YES. This is a noob story, you’ve been <code class="highlighter-rouge">warned</code>.</p>
+
+<p><strong>Preambule</strong> <br />
+<a href="https://github.com/merge/skulls" target="_blank">Skulls</a>  is pre-built coreboot images for Thinkpad X230.<br />
+I have two X230 and one of them i’m using as workhorse for my daily driver. 
+Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen.
+I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework.
+Always remember that you can brick your laptop when you do this wrong.<br />
+Here’s the great link to consider before do flashing :<br />
+<a href="https://github.com/merge/skulls/blob/master/x230/README.md" target="_blank">skulls</a><br />
+<a href="https://www.chucknemeth.com/laptop/lenovo-x230/flash-lenovo-x230-coreboot" target="_blank">chucknemeth</a><br />
+<a href="https://www.stefanolaguardia.eu/2019/06/08/howto-install-coreboot-and-disable-intel-me-on-lenovo-thinkpad-x230/" target="_blank">stefanolaguardia</a></p>
+
+<p><strong>Tools i’ve been using :</strong><br />
+Thinkpad X230<br />
+Another laptop/PC installed ubuntu<br />
+CH341a<br />
+Female to Female jumper cables (6 unit)<br />
+SOIC8 clip<br />
+Screwdriver</p>
+
+<p><strong>TL;DR</strong></p>
+<ol>
+  <li>Always and always backup your BIOS/Factory ROM, check and re-check again using <em>‘shasums’</em> until it exactly same when you already get the copies of you factory
+ROM. As far as i know, if anything goes wrong, you can restore again your factory ROM.</li>
+  <li>CH341a ‘noob’ issue.<br />
+I’ve try to make connection between my host laptop and BIOS chip using CH341a and SOIC8 clip, but whenever i check connection using flashrom, 
+it always error “Calibrating delay loop… OK. Couldn’t open device 1a86:5512. Error: Programmer initialization failed.”
+Damn, i’ve almost desperate that i’ve thinking is this CH341a is defect. I’ve googling this problem for hours and still i’ve found that no other face
+this same issue. Until, i’ve got <a href="https://axlforsat.wordpress.com/2018/08/05/tutorial-flash-ic-reciever-dengan-ch341a-dan-test-clip/" target="_blank">this</a>.
+When i’ve got CH341a at the first time, i noticed that in the packet there is yellow little thing that i don’t know what is that for. Turns out that is IC
+‘jumper’.
+In short when you want CH341a to upgrade IC receiver you must put that ‘jumper’ in pin 1 and pin 2. After do that, connection in flashrom is detected.
+Take me hours before i know this, so when you have a problem, remember : start trace from the root.</li>
+  <li>Windows compatibility issue.<br />
+I’ve using Windows 10 for my daily driver and ubuntu 18 in other laptop for development purpose. Before flashing my Windows 10 main laptop, i’ve tested flashing in
+ubuntu 18 laptop and everything going smoothly. I can boot to ubuntu and all is going well. Different story when i’m flashing my Win10 laptop, i can’t booting into
+OS, just stuck for hours at skulls BIOS. Since skulls using SeaBIOS for coreboot payload, i’ve found some article and discussion about <a href="https://www.coreboot.org/SeaBIOS#Windows" target="_blank">windows compatibility using
+coreboot</a>. I quote the article says <em>“SeaBIOS has been tested with Windows XP, Windows 2008, Windows Vista (64/32 bit), Windows 7 (32 bit and 64 bit). However, Windows has a very strict ACPI interpreter, and some coreboot boards do not have a complete ACPI definition. As a result, some coreboot boards may fail during Windows boot (eg, it may fail with a STOP 0xA5 code). Many boards do have working ACPI and are able to boot XP/Vista/Windows 7. Please check the board documentation or ask on the mailing list if unsure of the status.”</em> So i think the problem is ACPI and damn, i’ve already flash my Win10 laptop when i read this and i’ve too lazy to turning back so i’ve take the red pill, i’ve copy all my data and re-install again Win10 (take me damn half day to do this).</li>
+  <li>Re-install windows issue.<br />
+When you install Windows in skulls coreboot, just remember this : make sure that every setting in skulls coreboot is exactly the same when you install Windows and
+after install Windows. I face issue that after i install Windows and booting back Windows going BSOD immediately, even before i install Windows driver in Device
+Manager.</li>
+  <li>Memory setting issue in (again) Windows.\</li>
+</ol>
+
+
+  </div><a class="u-url" href="/2020/03/04/coreboot-story.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">məˈmenˌtō</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">məˈmenˌtō</li><li><a class="u-email" href="mailto:w.adisurya@gmail.com">w.adisurya@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/w-adisurya"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">w-adisurya</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>to share and give another legacy to this lonely world</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

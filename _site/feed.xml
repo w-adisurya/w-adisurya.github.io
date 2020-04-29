@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-29T23:45:10+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">məˈmenˌtō</title><subtitle>to share and give another legacy to this lonely world</subtitle><entry><title type="html">Coreboot Story using Skulls</title><link href="http://localhost:4000/2020/03/04/coreboot-story.html" rel="alternate" type="text/html" title="Coreboot Story using Skulls" /><published>2020-03-04T00:00:00+07:00</published><updated>2020-03-04T00:00:00+07:00</updated><id>http://localhost:4000/2020/03/04/coreboot-story</id><content type="html" xml:base="http://localhost:4000/2020/03/04/coreboot-story.html">&lt;p&gt;YES. This is a noob story, you’ve been &lt;code class=&quot;highlighter-rouge&quot;&gt;warned&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Preambule&lt;/strong&gt; &lt;br /&gt;
+&lt;a href=&quot;https://github.com/merge/skulls&quot; target=&quot;_blank&quot;&gt;Skulls&lt;/a&gt;  is pre-built coreboot images for Thinkpad X230.&lt;br /&gt;
+I have two X230 and one of them i’m using as workhorse for my daily driver. 
+Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen.
+I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework.
+Always remember that you can brick your laptop when you do this wrong.&lt;br /&gt;
+Here’s the great link to consider before do flashing :&lt;br /&gt;
+&lt;a href=&quot;https://github.com/merge/skulls/blob/master/x230/README.md&quot; target=&quot;_blank&quot;&gt;skulls&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.chucknemeth.com/laptop/lenovo-x230/flash-lenovo-x230-coreboot&quot; target=&quot;_blank&quot;&gt;chucknemeth&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.stefanolaguardia.eu/2019/06/08/howto-install-coreboot-and-disable-intel-me-on-lenovo-thinkpad-x230/&quot; target=&quot;_blank&quot;&gt;stefanolaguardia&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tools i’ve been using :&lt;/strong&gt;&lt;br /&gt;
+Thinkpad X230&lt;br /&gt;
+Another laptop/PC installed ubuntu&lt;br /&gt;
+CH341a&lt;br /&gt;
+Female to Female jumper cables (6 unit)&lt;br /&gt;
+SOIC8 clip&lt;br /&gt;
+Screwdriver&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Always and always backup your BIOS/Factory ROM, check and re-check again using &lt;em&gt;‘shasums’&lt;/em&gt; until it exactly same when you already get the copies of you factory
+ROM. As far as i know, if anything goes wrong, you can restore again your factory ROM.&lt;/li&gt;
+  &lt;li&gt;CH341a ‘noob’ issue.&lt;br /&gt;
+I’ve try to make connection between my host laptop and BIOS chip using CH341a and SOIC8 clip, but whenever i check connection using flashrom, 
+it always error “Calibrating delay loop… OK. Couldn’t open device 1a86:5512. Error: Programmer initialization failed.”
+Damn, i’ve almost desperate that i’ve thinking is this CH341a is defect. I’ve googling this problem for hours and still i’ve found that no other face
+this same issue. Until, i’ve got &lt;a href=&quot;https://axlforsat.wordpress.com/2018/08/05/tutorial-flash-ic-reciever-dengan-ch341a-dan-test-clip/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;.
+When i’ve got CH341a at the first time, i noticed that in the packet there is yellow little thing that i don’t know what is that for. Turns out that is IC
+‘jumper’.
+In short when you want CH341a to upgrade IC receiver you must put that ‘jumper’ in pin 1 and pin 2. After do that, connection in flashrom is detected.
+Take me hours before i know this, so when you have a problem, remember : start trace from the root.&lt;/li&gt;
+  &lt;li&gt;Windows compatibility issue.&lt;br /&gt;
+I’ve using Windows 10 for my daily driver and ubuntu 18 in other laptop for development purpose. Before flashing my Windows 10 main laptop, i’ve tested flashing in
+ubuntu 18 laptop and everything going smoothly. I can boot to ubuntu and all is going well. Different story when i’m flashing my Win10 laptop, i can’t booting into
+OS, just stuck for hours at skulls BIOS. Since skulls using SeaBIOS for coreboot payload, i’ve found some article and discussion about &lt;a href=&quot;https://www.coreboot.org/SeaBIOS#Windows&quot; target=&quot;_blank&quot;&gt;windows compatibility using
+coreboot&lt;/a&gt;. I quote the article says &lt;em&gt;“SeaBIOS has been tested with Windows XP, Windows 2008, Windows Vista (64/32 bit), Windows 7 (32 bit and 64 bit). However, Windows has a very strict ACPI interpreter, and some coreboot boards do not have a complete ACPI definition. As a result, some coreboot boards may fail during Windows boot (eg, it may fail with a STOP 0xA5 code). Many boards do have working ACPI and are able to boot XP/Vista/Windows 7. Please check the board documentation or ask on the mailing list if unsure of the status.”&lt;/em&gt; So i think the problem is ACPI and damn, i’ve already flash my Win10 laptop when i read this and i’ve too lazy to turning back so i’ve take the red pill, i’ve copy all my data and re-install again Win10 (take me damn half day to do this).&lt;/li&gt;
+  &lt;li&gt;Re-install windows issue.&lt;br /&gt;
+When you install Windows in skulls coreboot, just remember this : make sure that every setting in skulls coreboot is exactly the same when you install Windows and
+after install Windows. I face issue that after i install Windows and booting back Windows going BSOD immediately, even before i install Windows driver in Device
+Manager.&lt;/li&gt;
+  &lt;li&gt;Memory setting issue in (again) Windows.\&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">YES. This is a noob story, you’ve been warned. Preambule Skulls is pre-built coreboot images for Thinkpad X230. I have two X230 and one of them i’m using as workhorse for my daily driver. Actually flashing done in under 1 hour if all smooth. I’m doing this in under 24 hours with a lot of confusion so i want to share issues that i’ve passed. I suggest you have spare laptop if something bad happen. I follow step at below link, you can follow that too, just make sure you read all section thoroughly and understand what you’re doing, do your homework. Always remember that you can brick your laptop when you do this wrong. Here’s the great link to consider before do flashing : skulls chucknemeth stefanolaguardia</summary></entry><entry><title type="html">High Availability PostgreSQL 9.6 using Bucardo</title><link href="http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html" rel="alternate" type="text/html" title="High Availability PostgreSQL 9.6 using Bucardo" /><published>2019-10-16T22:32:00+07:00</published><updated>2019-10-16T22:32:00+07:00</updated><id>http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo</id><content type="html" xml:base="http://localhost:4000/it/2019/10/16/HA-postgresql-bucardo.html">&lt;p&gt;&lt;strong&gt;Requirement:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;User Requirement&lt;/th&gt;
+      &lt;th&gt;Installed&lt;/th&gt;
+      &lt;th&gt;How to check&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;OS&lt;/td&gt;
+      &lt;td&gt;centos6.x&lt;/td&gt;
+      &lt;td&gt;CentOS release 6.9 (Final)&lt;/td&gt;
+      &lt;td&gt;/etc/centos-release&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Postgres&lt;/td&gt;
+      &lt;td&gt;9.6&lt;/td&gt;
+      &lt;td&gt;9.6.15&lt;/td&gt;
+      &lt;td&gt;SELECT version ();&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;head&gt;						&lt;!--- Memberikan border line pada table ---&gt;
+&lt;style&gt;
+table 
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;p&gt;&lt;br /&gt;							&lt;!--- Memberikan blank line ---&gt;
+Buat dua Virtual Machine dengan konfigurasi sbb:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dummy Server:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;IP&lt;/th&gt;
+      &lt;th&gt;Hostname&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.6&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Floating IP&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.10&lt;/td&gt;
+      &lt;td&gt;node5.test&lt;/td&gt;
+      &lt;td&gt;Master Server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.11&lt;/td&gt;
+      &lt;td&gt;node6.test&lt;/td&gt;
+      &lt;td&gt;Slave Server&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pastikan server master dan slave sama2 mempunyai eth0&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Backup configuration file dengan nama .backup&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;install-bucardo-in-master-and-slave&quot;&gt;Install Bucardo in Master and Slave&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://bucardo.org/downloads/DBIx-Safe-1.2.5.tar.gz
+tar xvfz dbix_safe.tar.gz
+cd DBIx-Safe-1.2.5
+perl Makefile.PL
+make
+make test
+sudo make install
+wget https://bucardo.org/downloads/Bucardo-5.5.0.tar.gz
+tar xvfz Bucardo-5.5.0.tar.gz
+perl Makefile.PL
+make
+sudo make install
+sudo mkdir /var/run/bucardo
+sudo chmod 777 /var/run/bucardo
+su postgres
+psql
+create user bucardo superuser;
+create database bucardo;
+alter database bucardo owner to bucardo;
+\q
+exit
+sudo bucardo install
+bucardo show all
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-database-and-tables-in-master-and-slave&quot;&gt;Create Database and tables in Master and Slave&lt;/h3&gt;
+&lt;p&gt;Bucardo mandatory that every table should have primary key for replication purpose&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;su postgres
+psql
+create database mus;
+\c mus
+create table tab1( id integer primary key,num integer);
+create table tab2( id integer primary key,num integer);
+create table tab3( id integer primary key,num integer);
+\dt
+\q
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;make-replication-with-bucardo-setting-only-in-master&quot;&gt;Make Replication with Bucardo, setting only in Master&lt;/h3&gt;
+&lt;p&gt;bucardo add database serv1 dbname=mus
+bucardo add database serv2 dbname=mus host=192.168.10.11 dbuser=postgres dbpass=postgres&lt;br /&gt;
+nano /var/lib/pgsql/9.6/data/pg_hba.conf&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# &quot;local&quot; is for Unix domain socket connections only
+local   all             bucardo                                 trust
+local   all             postgres                                trust
+local   all             all                                     trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+host    all             all             127.0.0.1/32            md5
+host    all             all             192.168.10.4/24         md5
+host    all             all             192.168.10.11/24        trust
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;bucardo add table % db=serv1&lt;br /&gt;
+bucardo add table % db=serv2&lt;br /&gt;
+bucardo add all tables –herd=one_two db=serv1&lt;br /&gt;
+bucardo add all tables –herd=two_one db=serv2&lt;br /&gt;
+bucardo add sync sync_onetotwo relgroup=one_two db=serv1,serv2&lt;br /&gt;
+bucardo add sync sync_twotoone relgroup=two_one db=serv2,serv1&lt;br /&gt;
+bucardo list database&lt;br /&gt;
+bucardo list sync&lt;br /&gt;
+bucardo status&lt;br /&gt;
+mkdir /var/log/log.bucardo&lt;br /&gt;
+tail -f /var/log/bucardo/log.bucardo&lt;br /&gt;
+bucardo start&lt;br /&gt;
+bucardo show all&lt;/p&gt;
+
+&lt;h3 id=&quot;testing&quot;&gt;Testing&lt;/h3&gt;
+&lt;p&gt;Using DBeaver Enterprise to Generate Mock Data in tables, make 1500 row in DB Master&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock.JPG&quot; alt=&quot;dbeaver-mock&quot; title=&quot;dbeaver-mock&quot; /&gt;
+&lt;img src=&quot;\images\dbeaver-mock2.JPG&quot; alt=&quot;dbeaver-mock2&quot; title=&quot;dbeaver-mock2&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;
+Check DB in Slave should be sama with data in DB Master&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock3.JPG&quot; alt=&quot;dbeaver-mock3&quot; title=&quot;dbeaver-mock3&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;
+Check Bucardo status replication&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock4.JPG&quot; alt=&quot;dbeaver-mock4&quot; title=&quot;dbeaver-mock4&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;
+Remove data from DB Slave in tab1, replace with 200 row data&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock5.JPG&quot; alt=&quot;dbeaver-mock5&quot; title=&quot;dbeaver-mock5&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock6.JPG&quot; alt=&quot;dbeaver-mock6&quot; title=&quot;dbeaver-mock6&quot; /&gt; 
+&lt;br /&gt; 
+Check in DB Master, should be 200 row data, same with DB Slave&lt;br /&gt;
+&lt;img src=&quot;\images\dbeaver-mock7.JPG&quot; alt=&quot;dbeaver-mock7&quot; title=&quot;dbeaver-mock7&quot; /&gt; 
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;syntax-for-backup-restore-db&quot;&gt;Syntax for backup restore DB&lt;/h3&gt;
+&lt;p&gt;su postgres
+psql
+pg_dump “db_name” &amp;gt; “place to save backup sql”
+&lt;img src=&quot;\images\backup-db1.JPG&quot; alt=&quot;backup-db1&quot; title=&quot;backup-db1&quot; /&gt;
+&lt;br /&gt;
+To restore, first create database to restore data
+&lt;img src=&quot;\images\backup-db2.JPG&quot; alt=&quot;backup-db2&quot; title=&quot;backup-db2&quot; /&gt;&lt;br /&gt;
+psql “db_name” &amp;lt; “backup sql”
+&lt;br /&gt;
+&lt;img src=&quot;\images\backup-db3.JPG&quot; alt=&quot;backup-db3&quot; title=&quot;backup-db3&quot; /&gt;&lt;br /&gt;
+Check database in pgAdmin
+&lt;br /&gt;
+&lt;img src=&quot;\images\backup-db4.JPG&quot; alt=&quot;backup-db4&quot; title=&quot;backup-db4&quot; /&gt;
+&lt;img src=&quot;\images\backup-db5.JPG&quot; alt=&quot;backup-db5&quot; title=&quot;backup-db5&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Requirement:</summary></entry><entry><title type="html">High Availability PHP and Apache using heartbeat</title><link href="http://localhost:4000/it/2019/10/16/HA-php-apache-heartbeat.html" rel="alternate" type="text/html" title="High Availability PHP and Apache using heartbeat" /><published>2019-10-16T14:10:00+07:00</published><updated>2019-10-16T14:10:00+07:00</updated><id>http://localhost:4000/it/2019/10/16/HA-php-apache-heartbeat</id><content type="html" xml:base="http://localhost:4000/it/2019/10/16/HA-php-apache-heartbeat.html">&lt;p&gt;&lt;strong&gt;Requirement:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;User Requirement&lt;/th&gt;
+      &lt;th&gt;Installed&lt;/th&gt;
+      &lt;th&gt;How to check&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;OS&lt;/td&gt;
+      &lt;td&gt;centos6.x&lt;/td&gt;
+      &lt;td&gt;CentOS release 6.9 (Final)&lt;/td&gt;
+      &lt;td&gt;/etc/centos-release&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache&lt;/td&gt;
+      &lt;td&gt;bebas&lt;/td&gt;
+      &lt;td&gt;httpd-2.2.15-69.el6.centos.x86_64&lt;/td&gt;
+      &lt;td&gt;rpm -q httpd&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PHP&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;7.0.33&lt;/td&gt;
+      &lt;td&gt;php -v&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Postgres&lt;/td&gt;
+      &lt;td&gt;9.6&lt;/td&gt;
+      &lt;td&gt;9.6.15&lt;/td&gt;
+      &lt;td&gt;SELECT version ();&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;head&gt;						&lt;!--- Memberikan border line pada table ---&gt;
+&lt;style&gt;
+table 
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;p&gt;&lt;br /&gt;							&lt;!--- Memberikan blank line ---&gt;
+Buat dua Virtual Machine dengan konfigurasi sbb:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dummy Server:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;IP&lt;/th&gt;
+      &lt;th&gt;Hostname&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.6&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Floating IP&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.10&lt;/td&gt;
+      &lt;td&gt;node5.test&lt;/td&gt;
+      &lt;td&gt;Master Server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;192.168.10.11&lt;/td&gt;
+      &lt;td&gt;node6.test&lt;/td&gt;
+      &lt;td&gt;Slave Server&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pastikan server master dan slave sama2 mempunyai eth0&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Backup configuration file dengan nama .backup&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;both-server-config&quot;&gt;Both Server config&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum install epel-release
+yum install httpd -y
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+yum install yum-utils
+yum-config-manager --enable remi-php70
+yum install php
+yum install heartbeat -y
+service httpd start
+chkconfig httpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;master-server-config&quot;&gt;Master Server Config&lt;/h3&gt;
+&lt;p&gt;echo “node5 server1 hidup” &amp;gt; /var/www/html/index.html&lt;br /&gt;
+cd /etc/ha.d/&lt;br /&gt;
+touch authkeys ha.cf haresources&lt;/p&gt;
+
+&lt;p&gt;vim /etc/ha.d/authkeys&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;auth3
+3 md5 test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;vim /etc/ha.d/ha.cf&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bcast eth0
+keepalive 2
+warntime 5
+deadtime 10
+initdead 20
+autojoin none
+node node5.test
+node node6.test
+auto_failback on
+debugfile /var/log/ha-debug
+logfile /var/log/ha-log
+logfacility local0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;vim /etc/ha.d/haresources&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node5.test IPaddr::192.168.10.10/24/eth0 httpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;scp /etc/ha.d/ha.cf 192.168.10.11:/etc/ha.d/&lt;br /&gt;
+scp /etc/ha.d/haresources 192.168.10.11:/etc/ha.d/&lt;br /&gt;
+scp /etc/ha.d/authkeys 192.168.10.11:/etc/ha.d/&lt;/p&gt;
+
+&lt;h3 id=&quot;slave-server-config&quot;&gt;Slave Server Config&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo &quot;node5 server1 sedang down, saat ini anda ada di node6 server2&quot; &amp;gt; /var/www/html/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;check-ha&quot;&gt;Check HA&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service heartbeat start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Open browser, cek 192.168.10.10, test failover&lt;br /&gt;
+&lt;img src=&quot;\images\apache-heartbeat.jpg&quot; alt=&quot;apache&quot; title=&quot;Apache HA test&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;configure-web-directory-replication&quot;&gt;Configure Web Directory Replication&lt;/h2&gt;
+&lt;h3 id=&quot;master-server-client-machine-config&quot;&gt;Master Server (Client Machine) Config&lt;/h3&gt;
+&lt;p&gt;Setup SSH Keys for password less logon :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen
+cat ~/.ssh/id_rsa.pub | ssh root@192.168.10.11 &quot;mkdir -p ~/.ssh &amp;amp;&amp;amp; touch ~/.ssh/authorized_keys &amp;amp;&amp;amp; 
+chmod -R go= ~/.ssh &amp;amp;&amp;amp; cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&quot;
+ssh root@192.168.10.11
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;\images\passwordless-logon.jpg&quot; alt=&quot;passwordless-logon&quot; title=&quot;passwordless-logon&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;				&lt;!--- Memberikan blank line ---&gt;
+Setup Crontab and rsync :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;crontab -e
+* * * * * /usr/bin/rsync -rtvuc --delete-before /var/www/html/ root@192.168.10.11:/var/www/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Setting diatas akan menjalankan sinkronisasi folder /var/www/html dari Master Server ke Slave Server setiap 1 menit, perubahan yang disinkronisasi hanya perubahan di Master Server.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;\images\crontab.JPG&quot; alt=&quot;crontab&quot; title=&quot;crontab&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Requirement:</summary></entry><entry><title type="html">CATs</title><link href="http://localhost:4000/2019/10/09/CATs.html" rel="alternate" type="text/html" title="CATs" /><published>2019-10-09T00:00:00+07:00</published><updated>2019-10-09T00:00:00+07:00</updated><id>http://localhost:4000/2019/10/09/CATs</id><content type="html" xml:base="http://localhost:4000/2019/10/09/CATs.html">&lt;p&gt;&lt;em&gt;This post intended to make something viewable&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Say hi to &lt;a href=&quot;https://www.google.com&quot; target=&quot;_blank&quot;&gt;our new friend&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;\images\raurus.png&quot; alt=&quot;shycat&quot; title=&quot;shycat&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">This post intended to make something viewable</summary></entry></feed>
