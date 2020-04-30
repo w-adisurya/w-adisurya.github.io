@@ -19,6 +19,7 @@ Here's the great link to consider before do flashing :
 [skulls](https://github.com/merge/skulls/blob/master/x230/README.md){:target="_blank"}  
 [chucknemeth](https://www.chucknemeth.com/laptop/lenovo-x230/flash-lenovo-x230-coreboot){:target="_blank"}  
 [stefanolaguardia](https://www.stefanolaguardia.eu/2019/06/08/howto-install-coreboot-and-disable-intel-me-on-lenovo-thinkpad-x230/){:target="_blank"}  
+[joeyd](https://steemit.com/tutorial/@joeyd/run-don-t-walk-from-the-blob){:target="_blank"}
 
 **Tools i've been using :**  
 Thinkpad X230  
