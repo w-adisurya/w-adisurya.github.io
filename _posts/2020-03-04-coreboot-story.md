@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "X230 Coreboot Story using Skulls"
+title: "Coreboot Story using Skulls"
 date: 2020-03-04
 ---
 
