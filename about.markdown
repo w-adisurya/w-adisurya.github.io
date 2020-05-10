@@ -12,9 +12,9 @@ touch me at :
 [LinkedIn](https://www.linkedin.com/in/adisuryaw/){:target="_blank"} \
 [Instagram](https://www.instagram.com/asuryaws/){:target="_blank"}
 
-find my public key below for anything private :-|
+find my public key below for anything private
 
-`-----BEGIN PGP PUBLIC KEY BLOCK-----
+`-----BEGIN PGP PUBLIC KEY BLOCK-----`
 
 mQENBF638S4BCADYLpRF3PCKQKSlGlwy7qPrmdcYIq2fn1BXjviC6dnGsl29k+hu
 zOJ+Pq/ujgRHtHaNB+XuTYi7JW9BVAjSxRd/K1pr7R8hKkB0TqqYMYBygoOFAiis
@@ -43,4 +43,4 @@ oVkA5t18uC0LpcPkSbmGQeuGHc8R1RIiEFIJnbbzcWTFVscwCzCeDLN6JGz6825s
 VfMsWFDvCzMWpk1xInxyn24MXsFMLvMNZ/zbaXZ/XItvXKP+b6vscxhcOE98yb3V
 mDLp7pS+pK4GbwOYUCTmbWg2p7POPf17lM3A4AhlR6877gwGxg==
 =iSzN
------END PGP PUBLIC KEY BLOCK-----`
+`-----END PGP PUBLIC KEY BLOCK-----`|
