@@ -60,7 +60,10 @@ When you install Windows in skulls coreboot, just remember this : make sure that
 Still happen till now, always stuck when do memtest, memory configuration is dual memory with same speed but different size and brand.  
 But when try using single channel, it pass with no error. Nonetheless, no problem for me using dual channel as daily driver config.  
 <img src="\images\coreboot\dual channel.jpg" alt="dual channel" title="dual channel" width="300" height="200" />
-	<img src="\images\coreboot\single channel.jpg" alt="single channel" title="single channel" width="300" height="200" />
+	<img src="\images\coreboot\single channel.jpg" alt="single channel" title="single channel" width="300" height="200" />  
+Damn, now i've got some BSOD state that there's problem with memory issue blablablabla ROFL
+6. Somehow, i can't install Synaptics driver for X230, that's weird. Seems just like it won't working, weird. No problemo for me though.
+Actually, i've more comfortable using red nipple in X230 referred as TrackPoint, or simply just using mouse.  
 
 Ok, that's quick recap what i've done when try flashing using skulls, nevertheless i've been really enjoy do this hardware flashing.  
 Here some photos i took when do flashing, have fun.   
