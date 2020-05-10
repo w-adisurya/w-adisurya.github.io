@@ -12,7 +12,7 @@ touch me at :
 [LinkedIn](https://www.linkedin.com/in/adisuryaw/){:target="_blank"} \
 [Instagram](https://www.instagram.com/asuryaws/){:target="_blank"}
 
-for private line, use below key
+`for private line, use below public key`
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----  
 
