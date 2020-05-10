@@ -6,7 +6,10 @@ permalink: /about/
 
  ~ anything that reminds someone of something ~  
 Crawling in Server x86, Storage, OS and Virtualization.  
-interested in anything interesting.
+interested in anything interesting
+keep it simply simple
+.. [or] too lazy to make beautiful pages
+get used to it
 
 touch me at :  
 [LinkedIn](https://raw.githubusercontent.com/w-adisurya/w-adisurya.github.io/master/images/blue.JPG){:target="_blank"} \
