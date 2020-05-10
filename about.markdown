@@ -12,6 +12,8 @@ touch me at :
 [LinkedIn](https://www.linkedin.com/in/adisuryaw/){:target="_blank"} \
 [Instagram](https://www.instagram.com/asuryaws/){:target="_blank"}
 
+find my public key below for anything private :-|
+
 `-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQENBF638S4BCADYLpRF3PCKQKSlGlwy7qPrmdcYIq2fn1BXjviC6dnGsl29k+hu
