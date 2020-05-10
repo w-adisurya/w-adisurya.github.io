@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
  ~ anything that reminds someone of something ~  
-System Engineer for Server x86, Storage, OS and Virtualization.  
+Crawl for Server x86, Storage, OS and Virtualization.  
 interested in anything interesting.
 
 touch me at :  
@@ -14,7 +14,7 @@ touch me at :
 
 `for private line, use below public key`
 
------BEGIN PGP PUBLIC KEY BLOCK-----  
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQENBF638S4BCADYLpRF3PCKQKSlGlwy7qPrmdcYIq2fn1BXjviC6dnGsl29k+hu
 zOJ+Pq/ujgRHtHaNB+XuTYi7JW9BVAjSxRd/K1pr7R8hKkB0TqqYMYBygoOFAiis
@@ -44,5 +44,5 @@ VfMsWFDvCzMWpk1xInxyn24MXsFMLvMNZ/zbaXZ/XItvXKP+b6vscxhcOE98yb3V
 mDLp7pS+pK4GbwOYUCTmbWg2p7POPf17lM3A4AhlR6877gwGxg==
 =iSzN  
 
------END PGP PUBLIC KEY BLOCK-----  
+-----END PGP PUBLIC KEY BLOCK-----
 
