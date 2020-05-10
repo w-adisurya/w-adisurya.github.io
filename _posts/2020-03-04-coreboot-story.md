@@ -7,7 +7,7 @@ date: 2020-03-04
 YES. This is a noob story, you've been `warned`.
  
 **Preambule**  
-Actually, before i decide to using try hardware flash using skulls coreboot, i've already try install custom bios images from [1vyrain](https://github.com/n4ru/1vyrain/){:target="_blank"}  to remove whitelist hardware and pop out BIOS advanced menu, shout out to [1vyrain](https://1vyra.in/){:target="_blank"}  
+Actually, before i decide to try hardware flash using skulls coreboot, i've already try install custom bios images from [1vyrain](https://github.com/n4ru/1vyrain/){:target="_blank"}  to remove whitelist hardware and pop out BIOS advanced menu, shout out to [1vyrain](https://1vyra.in/){:target="_blank"}  
 <img src="\images\coreboot\1vyrain.jpg" alt="1vyrain" title="1vyrain" width="300" height="200" />  
 
 [Skulls](https://github.com/merge/skulls){:target="_blank"}  is pre-built coreboot images for Thinkpad X230.  
