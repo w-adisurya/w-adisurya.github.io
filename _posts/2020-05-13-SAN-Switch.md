@@ -30,7 +30,7 @@ tr:nth-child(even) {
 <br/>							<!--- Memberikan blank line --->
 **Notes**:
 +	<em>Plug in serial cable to switch, UTP side to switch and USB side to your laptop</em>
-+	<em>Open putty, connection type is serial, speed is 96xx and serial line using whatever COM port that appear in your device manager, example: COM1 </em>
++	<em>Open putty, connection type is serial, speed is 9600 and serial line using whatever COM port that appear in your device manager, example: COM1 </em>
 +	<em>For safety purpose, backup zoning config using putty session logging, save it as .txt</em>
 +	<em>No_Light means no FC cables connected to that port, Online means FC cables connected and WWN is listed ready to configure, No_Module simply no FC module is plugged</em>
 +	<em>Zoning is one part of the main goal, after zoning, make new volume to attach to server and make server list that connected to SAN Storage, this part is usually done in Storage Manager</em>
