@@ -11,7 +11,8 @@ Todays menu : How to add zoning to SAN Switch for mapping new volume from storag
 This SAN Switch seems like Brocade 300 Switch, read the reference doc at [Brocade 300 Switch](https://www.dataswitchworks.com/datasheets/switches/300-ds-03.pdf){:target="_blank"}   
 Great Introduction into [Zoning Topology](http://www.sanadmin.net/2015/11/san-switches.html){:target="_blank"}  
 
-<img src="\images\SAN\SANTopology.png" title="SANTopology" /> 
+<img src="\images\SAN\SANTopology.jpg" title="SANTopology" /> 
+![SANTopology](\images\SAN\SANTopology.jpg "SANTopology")
 <head>						<!--- Memberikan border line pada table --->
 <style>
 table 
